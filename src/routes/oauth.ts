@@ -31,10 +31,9 @@ router.get('/getAccessToken', async (req: Request, res: Response):Promise<void> 
 router.get('/getUserData', async (req: Request, res: Response): Promise<void> => {
    const accessToken = req.get('Authorization') as string
    if (!accessToken) {
-      res.status(401).send({error: 'Not authorized'})
+      res.status(401).send({error: 'No Access Token'})
       return
    }
-   console.log(accessToken)
    try {
       const userData = await axios.get('https://api.github.com/user', {
          headers: {
@@ -43,7 +42,7 @@ router.get('/getUserData', async (req: Request, res: Response): Promise<void> =>
       })
       res.json(userData.data)
    } catch (error){
-      res.status(401).send({error: 'Not authorized'})
+      res.status(401).send({error: 'Login failed'})
    }
 })
 
