@@ -13,3 +13,13 @@ services:
       - .env.development
     volumes:
     - ./src:/app/src
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - 5452:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=testUser
+      - POSTGRES_DB=testDb
