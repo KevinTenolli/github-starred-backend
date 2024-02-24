@@ -1,0 +1,15 @@
+#Docker compose for development
+
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.development
+    volumes:
+    - ./src:/app/src

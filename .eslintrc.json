@@ -1,0 +1,16 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/await-thenable": "error",
+    "semi": ["error", "never"]
+  }
+}
+  
