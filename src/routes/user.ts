@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
-import axios from 'axios'
+import axiosInstance from '../middleware/axios'
+import { StarredRepository, StarredRepositoryIdentifierData } from '../models/starredRepository'
 dotenv.config()
 
 const router = express.Router()
@@ -13,16 +14,24 @@ router.get('/:username/starredRepos', async (req: Request, res: Response) => {
         return
     }
     if (!username) {
-        console.log(username)
         res.status(401).send({error: 'No username'})
         return
-    }
-    const response = await axios.get(`https://api.github.com/users/${username}/starred`, {
+    } 
+    const config = {
         headers: {
-            Authorization: accessToken
+            'Authorization': accessToken,
         }
+    }
+    const starredRepos:StarredRepository[] = await axiosInstance.get(`/users/${username}/starred`, undefined, config)
+    const repoData: StarredRepositoryIdentifierData[] = starredRepos.map((repo: StarredRepository) => {
+        const repoId = repo.id
+        const repoName = repo.name
+        const ownerId = repo.owner.id
+        const ownerUsername = repo.owner.login
+        return { repoId, repoName, ownerId, ownerUsername }
     })
-    res.json(response.data)
+    console.log(repoData)
+    res.json(starredRepos)
 })
 
 export default router

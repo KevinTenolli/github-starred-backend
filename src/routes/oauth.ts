@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
-import axios from 'axios'
+import axiosInstance from '../middleware/axios'
+import { GitHubUser } from '../models/githubUser'
+import { AccessTokenResponse } from '../models/tokenResponse'
 dotenv.config()
 
 const router = express.Router()
@@ -12,20 +14,20 @@ router.get('/getAccessToken', async (req: Request, res: Response):Promise<void> 
       code: req.query.code as string,
    }
 
-   const headers = {
-      'Accept': 'application/json',
+   const config = {
+      baseURL: 'https://github.com',
+      headers: {
+         'Accept': 'application/json',
+      }
    }
-
-   const response = await axios.post('https://github.com/login/oauth/access_token', null, {
-      params,
-      headers,
-   })
-
-   if (response.data.error) {
-      res.status(502).json({error: 'An error occurred, could not complete authentication'})
+   
+   const response: AccessTokenResponse = await axiosInstance.post('/login/oauth/access_token', params, config)
+   if (response.error) {
+      res.status(401).send({error: 'Login failed'})
    } else {
-      res.status(200).json(response.data)
+      res.status(200).json(response)
    }
+   
 })
 
 router.get('/getUserData', async (req: Request, res: Response): Promise<void> => {
@@ -34,15 +36,16 @@ router.get('/getUserData', async (req: Request, res: Response): Promise<void> =>
       res.status(401).send({error: 'No Access Token'})
       return
    }
+   const config = {
+      headers: {
+         'Authorization': accessToken,
+      }
+   }
    try {
-      const userData = await axios.get('https://api.github.com/user', {
-         headers: {
-            'Authorization': accessToken,
-         }
-      })
-      res.json(userData.data)
+      const userData:GitHubUser = await axiosInstance.get('/user', undefined , config)
+      res.json(userData)
    } catch (error){
-      res.status(401).send({error: 'Login failed'})
+      res.status(401).send({error: 'Cannot get user Info'})
    }
 })
 
