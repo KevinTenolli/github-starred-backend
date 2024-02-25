@@ -13,6 +13,8 @@ services:
       - .env.development
     volumes:
     - ./src:/app/src
+    depends_on: 
+    - postgres
   postgres:
     image: postgres:16-alpine
     ports:

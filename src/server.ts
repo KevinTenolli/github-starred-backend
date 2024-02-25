@@ -1,5 +1,6 @@
 import http from 'http'
 import app from './app'
+import { DatabaseSource } from './ormconfig'
 
 const port = process.env.PORT || 3000
 app.set('port', port)
@@ -25,10 +26,15 @@ server.on('error', (error: NodeJS.ErrnoException) => {
   }
 })
 
-server.on('listening', () => {
+server.on('listening', async () => {
   const addr = server.address()
-  if (addr) {
-    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
-    console.log(`Listening on ${bind}`)
+  try {
+    await DatabaseSource.initialize()
+    if (addr) {
+      const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+      console.log(`Listening on ${bind}`)
+    }
+  } catch (error) {
+    console.error('Database initialization error:', error)
   }
 })
