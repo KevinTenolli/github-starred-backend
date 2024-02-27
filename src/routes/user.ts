@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import axiosInstance from '../middleware/axios'
-import { StarredRepository, StarredRepositoryIdentifierData } from '../models/starredRepository'
+import { StarredRepository } from '../models/StarredRepository'
+import RepoController from '../controllers/RepoController'
 dotenv.config()
 
 const router = express.Router()
@@ -23,14 +24,8 @@ router.get('/:username/starredRepos', async (req: Request, res: Response) => {
         }
     }
     const starredRepos:StarredRepository[] = await axiosInstance.get(`/users/${username}/starred`, undefined, config)
-    const repoData: StarredRepositoryIdentifierData[] = starredRepos.map((repo: StarredRepository) => {
-        const repoId = repo.id
-        const repoName = repo.name
-        const ownerId = repo.owner.id
-        const ownerUsername = repo.owner.login
-        return { repoId, repoName, ownerId, ownerUsername }
-    })
-    console.log(repoData)
+    const repoData = RepoController.filterRepoInformation(starredRepos)
+    await RepoController.saveReposAndOwners(repoData)
     res.json(starredRepos)
 })
 

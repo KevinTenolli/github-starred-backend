@@ -1,6 +1,6 @@
 import http from 'http'
 import app from './app'
-import { DatabaseSource } from './ormconfig'
+import DatabaseSource  from './ormconfig'
 
 const port = process.env.PORT || 3000
 app.set('port', port)
@@ -30,6 +30,7 @@ server.on('listening', async () => {
   const addr = server.address()
   try {
     await DatabaseSource.initialize()
+    // await DatabaseSource.runMigrations({transaction: 'all'})
     if (addr) {
       const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
       console.log(`Listening on ${bind}`)

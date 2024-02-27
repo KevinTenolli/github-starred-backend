@@ -1,6 +1,7 @@
+import 'reflect-metadata'
 import { DataSource } from "typeorm"
 
-export const DatabaseSource = new DataSource({
+const DatabaseSource = new DataSource({
     type: 'postgres',
     host: process.env.POSTGRES_HOST,
     port: parseInt(process.env.POSTGRES_PORT || '5432'),
@@ -9,6 +10,9 @@ export const DatabaseSource = new DataSource({
     database: process.env.POSTGRES_DB,
     synchronize: false,
     logging: true,
-    entities: ['./entity/*.ts'],
-    migrations: ['./migration/*.ts'],
+    entities: ['src/entity/*.ts'],
+    migrations: ['src/migration/*.ts'],
+    migrationsTableName: "migration_table",
 })
+
+export default DatabaseSource

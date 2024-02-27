@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import axiosInstance from '../middleware/axios'
-import { GitHubUser } from '../models/githubUser'
-import { AccessTokenResponse } from '../models/tokenResponse'
+import { GitHubUser } from '../models/GithubUser'
+import { AccessTokenResponse } from '../models/TokenResponse'
 dotenv.config()
 
 const router = express.Router()

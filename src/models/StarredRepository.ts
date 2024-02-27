@@ -117,4 +117,3 @@ export interface StarredRepositoryIdentifierData {
   ownerId: number
   ownerUsername: string
 }
-  
