@@ -3,7 +3,6 @@ import { Repo } from "../entity/Repo.entity"
 import { StarredRepositoryIdentifierData, StarredRepository } from "../models/StarredRepository"
 import OwnerRepository from "../repository/OwnerRepository"
 import RepoRepository from "../repository/RepoRepository"
-import { getCommitData } from "./RepoCommitsController"
 
 export default class RepoController{
 
@@ -33,6 +32,5 @@ export default class RepoController{
         })
         await OwnerRepository.saveOwners(ownerList)
         await RepoRepository.saveRepos(repoList)
-        await getCommitData()
     }
 }

@@ -5,13 +5,13 @@ import { Repo } from "./Repo.entity"
 @Unique(['id'])
 export class Owner {
     @PrimaryColumn()
-    id!: number
+        id!: number
 
     @Column()
-    ownerUsername!: string
+        ownerUsername!: string
 
     @OneToMany(() => Repo, repo => repo.owner)
-    repos?: Repo[]
+        repos?: Repo[]
 }
 
 

@@ -6,7 +6,7 @@ export default class RepoRepository {
     static async getRepo(id: number) {
         const userRepository = DatabaseSource.getRepository(Repo)
         const repo = await userRepository.findOneBy({
-           id
+            id
         })
         return repo
     }

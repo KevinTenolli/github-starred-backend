@@ -6,19 +6,19 @@ import { Repo } from "./Repo.entity"
 export class RepoCommits {
 
   @PrimaryGeneratedColumn()
-  id!: number
-
-  @PrimaryColumn({ type: "date" })
-  commitDate!: Date
+      id?: number
 
   @PrimaryColumn()
-  repoId!: number
+      commitDate!: string
+
+  @PrimaryColumn()
+      repoId!: number
   
     @Column()
-    numberOfCommits!: number
+        numberOfCommits!: number
 
   @ManyToOne(() => Repo, repo => repo.commits)
   @JoinColumn({name: 'repoId', referencedColumnName: 'id'})
-  repo?: Repo
+      repo?: Repo
 }
 

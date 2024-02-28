@@ -6,7 +6,7 @@ export default class OwnerRepository {
     static async getOwner(id:number) {
         const userRepository = DatabaseSource.getRepository(Owner)
         const owner = await userRepository.findOneBy({
-           id
+            id
         })
         return owner
     }

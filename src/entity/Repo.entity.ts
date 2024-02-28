@@ -6,18 +6,18 @@ import { RepoCommits } from "./RepoCommits.entity"
 @Unique(['id'])
 export class Repo {
     @PrimaryColumn()
-    id!: number
+        id!: number
 
     @Column()
-    repoName!: string
+        repoName!: string
 
     @Column()
-    ownerId!: number
+        ownerId!: number
 
     @ManyToOne(() => Owner, owner => owner.repos)
     @JoinColumn({ name: 'ownerId', referencedColumnName: 'id' })
-    owner?: Owner
+        owner?: Owner
 
     @OneToMany(() => RepoCommits, commits => commits.repo)
-    commits?: RepoCommits[]
+        commits?: RepoCommits[]
 }

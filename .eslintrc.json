@@ -10,7 +10,8 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/await-thenable": "error",
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "indent": ["error", 4]
   }
 }
   
