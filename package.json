@@ -14,7 +14,10 @@
     "migration:generate": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./src/ormconfig.migration.ts",
     "migration:create": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "migration:revert": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/ormconfig.migration.ts",
-    "migration:run": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/ormconfig.migration.ts"
+    "migration:run": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/ormconfig.migration.ts",
+    "migration:generate:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./src/migration.ts",
+    "migration:revert:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/migration.ts",
+    "migration:run:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/migration.ts"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +30,7 @@
     "node-cron": "^3.0.3",
     "nodemon": "^3.1.0",
     "pg": "^8.11.3",
+    "pg-query-stream": "^4.5.3",
     "reflect-metadata": "^0.2.1",
     "typeorm": "^0.3.20"
   },

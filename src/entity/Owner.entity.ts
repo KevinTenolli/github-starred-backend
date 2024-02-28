@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, OneToMany, Unique } from "typeorm"
-import { Repo } from "./repo"
+import { Repo } from "./Repo.entity"
 
 @Entity()
 @Unique(['id'])

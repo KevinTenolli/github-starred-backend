@@ -1,4 +1,4 @@
-import { Owner } from "../entity/owner"
+import { Owner } from "../entity/Owner.entity"
 import DatabaseSource from "../ormconfig"
 
 export default class OwnerRepository {

@@ -1,8 +1,9 @@
-import { Owner } from "../entity/owner"
-import { Repo } from "../entity/repo"
+import { Owner } from "../entity/Owner.entity"
+import { Repo } from "../entity/Repo.entity"
 import { StarredRepositoryIdentifierData, StarredRepository } from "../models/StarredRepository"
 import OwnerRepository from "../repository/OwnerRepository"
 import RepoRepository from "../repository/RepoRepository"
+import { getCommitData } from "./RepoCommitsController"
 
 export default class RepoController{
 
@@ -30,8 +31,8 @@ export default class RepoController{
                 ownerUsername: entry.ownerUsername,
             })
         })
-        console.log(repoList)
         await OwnerRepository.saveOwners(ownerList)
         await RepoRepository.saveRepos(repoList)
+        await getCommitData()
     }
 }

@@ -1,4 +1,4 @@
-import { Repo } from "../entity/repo"
+import { Repo } from "../entity/Repo.entity"
 import DatabaseSource from "../ormconfig"
 
 export default class RepoRepository {

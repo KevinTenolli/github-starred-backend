@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, Unique, OneToMany, JoinColumn } from "typeorm"
-import { Owner } from "./owner"
-import { RepoCommits } from "./repoCommits"
+import { Owner } from "./Owner.entity"
+import { RepoCommits } from "./RepoCommits.entity"
 
 @Entity()
 @Unique(['id'])

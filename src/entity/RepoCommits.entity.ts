@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique, PrimaryColumn, JoinColumn } from "typeorm"
-import { Repo } from "./repo"
+import { Repo } from "./Repo.entity"
 
 @Entity()
 @Unique(["repo", "commitDate"])
