@@ -9,7 +9,6 @@ import cron from 'node-cron'
 
 export async function setupCronJob() {
     const cronString = process.env.CRON as string
-    console.log(process.env)
     return cron.schedule(cronString, async() => {
         await getCommitData()
     })
