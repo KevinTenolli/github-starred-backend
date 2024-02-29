@@ -17,7 +17,7 @@
     "migration:run": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/ormconfig.migration.ts",
     "migration:generate:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./src/migration.ts",
     "migration:revert:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/migration.ts",
-    "migration:run:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/migration.ts"
+    "migration:run:docker": "TS_NODE=true ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/ormconfig.ts"
   },
   "keywords": [],
   "author": "",

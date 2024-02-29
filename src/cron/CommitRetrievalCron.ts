@@ -8,8 +8,9 @@ import RepoCommitsRepository from '../repository/RepoCommitRepository'
 import cron from 'node-cron'
 
 export async function setupCronJob() {
-
-    cron.schedule('*/17 * * * *', async() => {
+    const cronString = process.env.CRON as string
+    console.log(process.env)
+    return cron.schedule(cronString, async() => {
         await getCommitData()
     })
     
@@ -25,7 +26,7 @@ interface DailyCommitData {
 /**
  * Retrieves missing commit data for all repositories.
  */
-export async function getCommitData() {
+async function getCommitData() {
     const client = await pgPool.connect()
     //get a stream of repositories, their names, their owner name, if there are commits saved, get their last commit date
     const query = new QueryStream(`
