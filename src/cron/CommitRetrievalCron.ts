@@ -41,7 +41,6 @@ async function getCommitData() {
     //for each repository, get the missing commit data and save it in the database
     for await (const row of stream as AsyncIterable<RepositoryData>) {
         const dataToInsert = await requestHandler(row)
-        console.log(dataToInsert)
         if (dataToInsert) {
             await RepoCommitsRepository.saveRepoCommits(dataToInsert)
         }
