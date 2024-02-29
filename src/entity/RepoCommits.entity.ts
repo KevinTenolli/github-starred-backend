@@ -1,12 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique, PrimaryColumn, JoinColumn } from "typeorm"
+import { Entity, Column, ManyToOne, Unique, PrimaryColumn, JoinColumn } from "typeorm"
 import { Repo } from "./Repo.entity"
 
 @Entity()
 @Unique(["repo", "commitDate"])
 export class RepoCommits {
-
-  @PrimaryGeneratedColumn()
-      id?: number
 
   @PrimaryColumn()
       commitDate!: string

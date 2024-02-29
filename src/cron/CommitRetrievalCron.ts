@@ -46,7 +46,7 @@ async function getCommitData() {
                 await RepoCommitsRepository.saveRepoCommits(dataToInsert)
             }
         } catch (error) {
-            console.error(`Error while handling request and saving data for row ${row}:`, error)
+            console.error(`Error while handling request and saving data for row ${JSON.stringify(row)}:`, error)
         }
     }
 }
@@ -115,13 +115,14 @@ async function fetchCommitsPage(repositoryData: RepositoryData, page: number = 1
             page: page,
             since: repositoryData.lastCommitDate
         })
+    } else {
+        return await octokit.request('GET /repos/{owner}/{repo}/commits', {
+            owner: repositoryData.ownerUsername,
+            repo: repositoryData.repoName,
+            per_page: 100,
+            page: page,
+        })
     }
-    return await octokit.request('GET /repos/{owner}/{repo}/commits', {
-        owner: repositoryData.ownerUsername,
-        repo: repositoryData.repoName,
-        per_page: 100,
-        page: page,
-    })
 
 }
 
