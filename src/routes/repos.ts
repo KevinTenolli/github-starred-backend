@@ -10,7 +10,7 @@ router.get('/repo/:repoId', async (req: Request, res: Response) => {
         return
     }
     const data = await RepoCommitController.getCommitDataForRepo(parseInt(repoId))
-    res.json({data})
+    res.json(data)
   
 })
 

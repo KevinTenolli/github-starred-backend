@@ -40,9 +40,13 @@ async function getCommitData() {
     
     //for each repository, get the missing commit data and save it in the database
     for await (const row of stream as AsyncIterable<RepositoryData>) {
-        const dataToInsert = await requestHandler(row)
-        if (dataToInsert) {
-            await RepoCommitsRepository.saveRepoCommits(dataToInsert)
+        try {
+            const dataToInsert = await requestHandler(row)
+            if (dataToInsert) {
+                await RepoCommitsRepository.saveRepoCommits(dataToInsert)
+            }
+        } catch (error) {
+            console.error(`Error while handling request and saving data for row ${row}:`, error)
         }
     }
 }
