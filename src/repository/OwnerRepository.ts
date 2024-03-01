@@ -13,7 +13,7 @@ export default class OwnerRepository {
     
     static async saveOwners(owners: Owner[]) {
         const ownerRepository = DatabaseSource.getRepository(Owner)
-      
+        owners = [...new Map(owners.map(x => [x.id, x])).values()]      
         await ownerRepository.save(owners)
     }
 }

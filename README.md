@@ -23,7 +23,8 @@ To run the project, follow these instructions:
     cp .env .env.development
     ```
 
-   Fill in the necessary values in the `.env.development` file.
+   Fill in the necessary values in the `.env.development` file. The secret and client id are
+   generated when creating the oauth app.
 
 2. Build and run the application using Docker Compose.
 
