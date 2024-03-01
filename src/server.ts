@@ -31,6 +31,7 @@ server.on('listening', async () => {
     const addr = server.address()
     try {
         await DatabaseSource.initialize()
+        await DatabaseSource.runMigrations({transaction: 'all'})
         const cron = await setupCronJob()
         cron.start()
         if (addr) {
